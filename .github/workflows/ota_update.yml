@@ -1,0 +1,27 @@
+name: OTA Update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build firmware
+      run: |
+        pio run -e esp32dev
+
+    - name: Generate OTA firmware image
+      run: |
+        pio run -t buildfs -e esp32dev
+        pio run -t upload --upload-port OTA_SERVER_IP -e esp32dev
+
+    - name: Trigger OTA update
+      run: |
+        curl -X POST OTA_DEVICE_URL
