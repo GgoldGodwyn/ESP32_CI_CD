@@ -25,10 +25,9 @@ jobs:
     - name: Generate OTA firmware image
       run: |
         pio run -t buildfs -e esp32doit-devkit-v1
-        pio run -t upload --upload-port https://ee66-102-88-63-49.ngrok-free.app -e esp32doit-devkit-v1
 
-    - name: Download Firmware
+    - name: Upload Firmware to NGrok Server
       run: |
-        wget https://ee66-102-88-63-49.ngrok-free.app/firmware/firmware.bin -O firmware.bin
+        curl -X POST -F "file=@.pio/build/esp32doit-devkit-v1/spiffs.bin" https://ee66-102-88-63-49.ngrok-free.app/upload
 
     # Additional steps if needed, such as testing firmware
