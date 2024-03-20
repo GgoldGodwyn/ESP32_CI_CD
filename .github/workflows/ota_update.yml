@@ -19,7 +19,7 @@ jobs:
     - name: Generate OTA firmware image
       run: |
         pio run -t buildfs -e esp32dev
-        pio run -t upload --upload-port OTA_SERVER_IP -e esp32dev
+        pio run -t upload --upload-port https://ee66-102-88-63-49.ngrok-free.app -e esp32dev
 
     - name: Download Firmware
       run: |
