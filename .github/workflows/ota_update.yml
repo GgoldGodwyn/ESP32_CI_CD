@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install PlatformIO
+      run: |
+        sudo python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/develop/scripts/get-platformio.py)"
+  
     - name: Checkout code
       uses: actions/checkout@v4
 
