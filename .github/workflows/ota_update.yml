@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install PlatformIO
-      run: |
-        sudo apt-get update
-        sudo apt-get install python3-pip
-        pip3 install platformio
+    # - name: Install PlatformIO
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install python3-pip
+    #     pip3 install platformio
   
     - name: Checkout code
       uses: actions/checkout@v4
@@ -24,8 +24,8 @@ jobs:
 
     - name: Generate OTA firmware image
       run: |
-        pio run -t buildfs -e esp32dev
-        pio run -t upload --upload-port https://ee66-102-88-63-49.ngrok-free.app -e esp32dev
+        pio run -t buildfs -e esp32doit-devkit-v1
+        pio run -t upload --upload-port https://ee66-102-88-63-49.ngrok-free.app -e esp32doit-devkit-v1
 
     - name: Download Firmware
       run: |
