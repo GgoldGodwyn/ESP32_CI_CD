@@ -28,6 +28,6 @@ jobs:
 
     - name: Upload Firmware to NGrok Server
       run: |
-        curl -X POST -F "file=@.pio/build/esp32doit-devkit-v1/spiffs.bin" https://ee66-102-88-63-49.ngrok-free.app/upload-firmware
+        curl -X POST -F "file=@.pio/build/esp32doit-devkit-v1/spiffs.bin" https://ee66-102-88-63-49.ngrok-free.app/api/upload-firmware
 
     # Additional steps if needed, such as testing firmware
