@@ -1,27 +1,28 @@
-name: OTA Update
+name: ESP32 Firmware Update
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build:
+  firmware_update:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.4.3
 
     - name: Build firmware
       run: |
-        pio run -e esp32dev
+        pio run -e esp32doit-devkit-v1
 
     - name: Generate OTA firmware image
       run: |
         pio run -t buildfs -e esp32dev
         pio run -t upload --upload-port OTA_SERVER_IP -e esp32dev
 
-    - name: Trigger OTA update
+    - name: Download Firmware
       run: |
-        curl -X POST OTA_DEVICE_URL
+        wget https://ee66-102-88-63-49.ngrok-free.app/firmware/firmware.bin -O firmware.bin
+
+    # Additional steps if needed, such as testing firmware
